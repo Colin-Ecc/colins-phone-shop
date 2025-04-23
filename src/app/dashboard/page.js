@@ -47,18 +47,18 @@ export default function Page() {
   const [data, setData] = useState(null)
   const [weather, setWeatherData] = useState(0)
  
-  useEffect(() => {
-    fetch('http://localhost:3000/api/getProducts')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-      })
-
-      fetch('api/getWeather')
-      .then((res) => res.json())
-      .then((weather) => {
-        setWeatherData(weather)
-      })
+  uuseEffect(() => {
+    fetch('api/getProducts')
+    .then((res) => res.json())
+    .then((data) => {
+    setData(data)
+    })
+    fetch('api/getWeather')
+    .then((res) => res.json())
+    .then((weather) => {
+    setWeatherData(weather)
+    })
+    
 
 
   }, [])
