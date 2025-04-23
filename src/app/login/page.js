@@ -1,5 +1,9 @@
+import { Title } from "@/components/Title/Title"
+
 export default function Login() {
   return (
-    <h1>Hello this is login</h1>
+    <Title text="Hello Login"/>
   );
+
+  
 }

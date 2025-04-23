@@ -1,5 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { Title } from "@/components/Title/Title"
+
 
 export default function Home() {
   return (
@@ -19,6 +21,10 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
           <li>This is a test..</li>
+          <li> COLIN </li>
+          <li>
+            <Title text="Hello World"/>
+          </li>
         </ol>
 
         <div className={styles.ctas}>
