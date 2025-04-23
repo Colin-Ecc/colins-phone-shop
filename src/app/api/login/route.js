@@ -17,8 +17,7 @@ export async function GET(req, res) {
  // =================================================
   const { MongoClient } = require('mongodb');
 
-  const url = 'mongodb+srv://colinecc:<db_password>@cluster0.mxjjuef.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-  const client = new MongoClient(url);
+  const client = new MongoClient(process.env.MONGODB);
   // mongodb://localhost:27017/
  
   // const dbName = 'app'; // docker database name

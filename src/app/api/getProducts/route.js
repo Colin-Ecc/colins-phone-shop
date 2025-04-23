@@ -10,8 +10,7 @@ export async function GET(req, res) {
   
    ///const url = 'mongodb://root:example@localhost:27017/';
    
-   const url = 'mongodb+srv://colinecc:<db_password>@cluster0.mxjjuef.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-   const client = new MongoClient(url);
+   const client = new MongoClient(process.env.MONGODB);
     
    
     const dbName = 'myDatabase'; // database name
