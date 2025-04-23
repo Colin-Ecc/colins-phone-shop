@@ -32,14 +32,14 @@ export default function Page() {
     const res = await fetch(url);
     const data = await res.json();
 
- 
-    if(data.data== "valid"){
-      console.log("login is valid!")
+
+    if(data.data== "true"){
+      console.log("registered")
 
       
     } else {
 
-      console.log("not valid  ")
+      console.log("not registered  ")
     }
   }
 
@@ -61,12 +61,14 @@ export default function Page() {
 
     let email = data.get('email')
 		let pass = data.get('pass')
-
+		let dob = data.get('dob')
     console.log("Sent email:" + email)
     console.log("Sent pass:" + pass)
+    console.log("Sent dob:" + dob)
 
 
-    runDBCallAsync(`http://localhost:3000/api/login?email=${email}&pass=${pass}`)
+    runDBCallAsync(`api/register?email=${email}&pass=${pass}&dob=${dob}`)
+
 
 
 
@@ -105,7 +107,7 @@ export default function Page() {
           
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+        Register
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -128,6 +130,17 @@ export default function Page() {
             id="pass"
             autoComplete="current-password"
           />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="dob"
+            label="dob"
+            type="text"
+            id="dob"
+            autoComplete=""
+          />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
@@ -138,8 +151,10 @@ export default function Page() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+           Register
           </Button>
+
+
 
 
           <Grid container>

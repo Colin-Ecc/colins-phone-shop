@@ -17,30 +17,32 @@ import {ThemeProvider } from '@mui/material/styles';
 import { createTheme } from '@mui/material/styles';
 import { green, purple } from '@mui/material/colors';
 
+import Script from 'next/script'
+
+
+
+
+
 
 export default function Page() {
 
 
+  function onloadCallback() {
+    alert("grecaptcha is ready!");
+  };
 
   /*
   This function does the actual work
   calling the fetch to get things from the database.
   */ 
-  async function runDBCallAsync(url) {
+  async function runDBCallAsync(url, newurl) {
 
 
-    const res = await fetch(url);
+    const res = await fetch(newurl);
     const data = await res.json();
 
+console.log(data)
  
-    if(data.data== "valid"){
-      console.log("login is valid!")
-
-      
-    } else {
-
-      console.log("not valid  ")
-    }
   }
 
 
@@ -49,24 +51,36 @@ export default function Page() {
   When the button is clicked, this is the event that is fired.
   The first thing we need to do is prevent the default refresh of the page.
   */
+  function onSubmit(token) {
+console.log(token)
+  }
+
 	const handleSubmit = (event) => {
 		
 		console.log("handling submit");
 
 
     event.preventDefault();
-  
-		const data = new FormData(event.currentTarget);
+    const data = new FormData(event.currentTarget);
+
+    let resp = data.get('g-recaptcha-response');
+
+   let newurl = ('https://www.google.com/recaptcha/api/siteverify?secret=SECRET_KEY&response='+resp);
+
+ 
+
 
 
     let email = data.get('email')
 		let pass = data.get('pass')
-
+		let dob = data.get('dob')
     console.log("Sent email:" + email)
     console.log("Sent pass:" + pass)
+    console.log("Sent dob:" + dob)
 
 
-    runDBCallAsync(`http://localhost:3000/api/login?email=${email}&pass=${pass}`)
+    runDBCallAsync(`api/register?email=${email}&pass=${pass}&dob=${dob}`, newurl)
+
 
 
 
@@ -88,9 +102,11 @@ export default function Page() {
 
 
 
-  
   return (
+    
     <ThemeProvider theme={theme}>
+
+
     <Container component="main"  maxWidth="xs">
       <CssBaseline />
       <Box
@@ -105,7 +121,7 @@ export default function Page() {
           
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+        Register
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -128,18 +144,35 @@ export default function Page() {
             id="pass"
             autoComplete="current-password"
           />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="dob"
+            label="dob"
+            type="text"
+            id="dob"
+            autoComplete=""
+          />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button
+
+<div  className="g-recaptcha" data-sitekey="6LdRBRYpAAAAAL7aly5-qD0OQvsN13H5bUzwYATA"></div>
+
+
+          <Button 
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+           Register
           </Button>
+
+
 
 
           <Grid container>
@@ -158,7 +191,7 @@ export default function Page() {
       </Box>
 
     </Container>
-
+    <Script src="https://www.google.com/recaptcha/api.js"/>
     </ThemeProvider>
 
   );

@@ -9,8 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.1.7"
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.13",
+    "mailersend": "^2.2.0",
+    "mongodb": "^6.15.0",
+    "next": "^13.5.7-canary.16",
+    "picocolors": "^1.0.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "request": "^2.88.2",
+    "requests": "^0.3.0"
   }
 }
