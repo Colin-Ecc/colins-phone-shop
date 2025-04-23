@@ -19,7 +19,7 @@ export async function GET(req, res) {
 
  // =================================================
   const { MongoClient } = require('mongodb');
-  const client = new MongoClient(process.env.MONGODB);
+   const client = new MongoClient(process.env.MONGODB);
   
  
   const dbName = 'myDatabase'; // database name
