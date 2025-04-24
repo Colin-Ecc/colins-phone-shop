@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export async function GET(req, res) {
 
     // Make a note we are on
