@@ -23,27 +23,29 @@ export async function GET(req, res) {
   // const dbName = 'app'; // docker database name
   const dbName = 'myDatabase'; // database name
 
-  await client.connect().then((message) => {
-    console.log(message)
-  })
-  .catch((err) => console.log(err));
+  await client.connect().then(() => console.log('CONNECTED')).catch((err) => console.log(err));
   console.log('Connected successfully to server');
   const db = client.db(dbName);
   console.log(db);
   // const collection = db.collection('login'); // docker collection name
-  const collection = db.collection('users'); // collection name
+  const collection = db.collection('login'); // collection name
 
-  const findResult = await collection.find({"username": "sample@test.com"}).toArray();
-  console.log('Found documents =>', findResult);
+  const findResult = await collection.find({"username": email}).toArray();
 
-  let valid = false
+  let valid = false;
+  console.log('SERVER');
   if(findResult.length > 0 ){
-      valid = true;
-      console.log("login valid")
+    console.log(findResult[0]);
+    
+      if (findResult[0].pass === pass) {
+        console.log("login valid")
+        valid = true;
+      }
   } else {
 
     valid = false;
     console.log("login invalid")
+    
   }
 
 
@@ -54,6 +56,6 @@ export async function GET(req, res) {
 
 
   // at the end of the process we need to send something back.
-  return Response.json({ "data":"" + valid + ""})
+  return Response.json({ "data": valid })
 }
 
