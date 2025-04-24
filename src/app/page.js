@@ -32,14 +32,14 @@ export default function Page() {
     const res = await fetch(url);
     const data = await res.json();
 
- 
-    if(data.data== "valid"){
+    if(data.data===true){
       console.log("login is valid!")
-
+// redirect
       
     } else {
 
       console.log("not valid  ")
+      // show error
     }
   }
 
@@ -66,7 +66,7 @@ export default function Page() {
     console.log("Sent pass:" + pass)
 
 
-    runDBCallAsync(`http://localhost:3000/api/login?email=${email}&pass=${pass}`)
+    runDBCallAsync(`/api/login?email=${email}&pass=${pass}`)
 
 
 
