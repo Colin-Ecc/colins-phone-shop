@@ -1,5 +1,8 @@
 
+import './globals.css';
+
 import Navbar from '../components/navbar';  // import the Navbar component
+
 
 export const metadata = {
   title: "Colin's Phone Shop",
