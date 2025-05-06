@@ -1,165 +1,42 @@
 'use client';
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import {ThemeProvider } from '@mui/material/styles';
-
-import { createTheme } from '@mui/material/styles';
-import { green, purple } from '@mui/material/colors';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { green } from '@mui/material/colors';
 
 
-export default function Page() {
+export default function IndexPage() {
 
-
-
-  /*
-  This function does the actual work
-  calling the fetch to get things from the database.
-  */ 
-  async function runDBCallAsync(url) {
-
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    if(data.data===true){
-      console.log("login is valid!")
-// redirect
-      
-    } else {
-
-      console.log("not valid  ")
-      // show error
-    }
-  }
-
-
-  /*
-
-  When the button is clicked, this is the event that is fired.
-  The first thing we need to do is prevent the default refresh of the page.
-  */
-	const handleSubmit = (event) => {
-		
-		console.log("handling submit");
-
-
-    event.preventDefault();
-  
-		const data = new FormData(event.currentTarget);
-
-
-    let email = data.get('email')
-		let pass = data.get('pass')
-
-    console.log("Sent email:" + email)
-    console.log("Sent pass:" + pass)
-
-
-    runDBCallAsync(`/api/login?email=${email}&pass=${pass}`)
-
-
-
-  }; // end handler
-
-
-
-
-  
   const theme = createTheme({
     palette: {
-     
       secondary: {
         main: green[500],
       },
     },
   });
-  
 
-
-
-  
   return (
     <ThemeProvider theme={theme}>
-    <Container component="main"  maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
+          minHeight: '100vh',
+          backgroundImage: 'url(/storeimage.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="pass"
-            label="Pass"
-            type="pass"
-            id="pass"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-
-
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
+        <CssBaseline />
+        <h1 style={{ fontSize: '4rem', color: '#fff', textShadow: '2px 2px 4px rgba(0,0,0,0.7)' }}>
+          Welcome to Colins Phone Store
+        </h1>
+        
+        
       </Box>
-
-    </Container>
-
     </ThemeProvider>
-
   );
 }
