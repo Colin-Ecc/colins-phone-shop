@@ -28,15 +28,16 @@ export default function Page() {
   //
   // function for putting items into the shopping cart.
   //
-  function putInCart(pname){
-
-    console.log("putting in cart: " + pname)
-
-
-    fetch("api/putInCart?pname="+pname);
-
-
- 
+  function putInCart(pname) {
+    console.log("putting in cart: " + pname);
+  
+    // Call your server API
+    fetch("api/putInCart?pname=" + pname);
+  
+    // ALSO update localStorage cart immediately
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(pname);
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
 
@@ -80,6 +81,8 @@ export default function Page() {
   
 
 
+  const handleCheckout = () => {}
+
 
 
 
@@ -102,6 +105,15 @@ export default function Page() {
             {item.price}
             <br></br>
             <Button onClick={() => putInCart(item.pname)} variant="outlined"> Add to cart </Button>
+            <Button
+             variant="contained"
+               color="secondary"
+              fullWidth
+              sx={{ mt: 4 }}
+              onClick={handleCheckout}>
+    Checkout
+  </Button>
+
           </div>
         ))
       }
@@ -113,6 +125,3 @@ export default function Page() {
 
   );
 }
-
-
-
