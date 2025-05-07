@@ -80,8 +80,25 @@ export default function Page() {
   });
   
 
+const handleCheckout = () => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) return alert("Your cart is empty.");
 
-  const handleCheckout = () => {}
+    fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: cart })
+    })
+      .then(res => res.json())
+      .then(response => {
+        alert("Order placed successfully!");
+        localStorage.removeItem('cart');
+      })
+      .catch(err => {
+        console.error("Checkout error:", err);
+        alert("Checkout failed.");
+      });
+  };
 
 
 
@@ -103,20 +120,18 @@ export default function Page() {
             {item.pname}
             - 
             {item.price}
-            <br></br>
-            <Button onClick={() => putInCart(item.pname)} variant="outlined"> Add to cart </Button>
-            <Button
-             variant="contained"
-               color="secondary"
-              fullWidth
-              sx={{ mt: 4 }}
-              onClick={handleCheckout}>
-    Checkout
-  </Button>
-
-          </div>
-        ))
-      }
+            </div>
+  ))
+}
+<Button
+  variant="contained"
+  color="secondary"
+  fullWidth
+  sx={{ mt: 4 }}
+  onClick={handleCheckout}
+>
+  Checkout
+</Button>
     </div>
 
     </Container>
