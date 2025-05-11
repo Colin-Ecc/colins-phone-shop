@@ -1,4 +1,4 @@
-export async function GET(req, res) {
+export async function POST(req, res) {
 
   // Make a note we are on
   // the api. This goes to the console.
@@ -8,7 +8,7 @@ export async function GET(req, res) {
   // get the values
   // that were sent across to us.
   const { searchParams } = new URL(req.url)
-  const pname = searchParams.get('pname')
+  const { pname, price } = await req.json(); 
 
   console.log(pname);
 
@@ -26,7 +26,7 @@ export async function GET(req, res) {
   const collection = db.collection('cart'); // collection name
 
 
-  var myobj = { pname: pname, username: "sample@test.com"};
+  var myobj = { pname: pname, price: price };
   const insertResult = await collection.insertOne(myobj);
 
 
@@ -37,6 +37,6 @@ export async function GET(req, res) {
 
 
   // at the end of the process we need to send something back.
-  return Response.json({ "data":"" + "inserted" + ""})
+  return Response.json({ "data":"" + "inserted" + insertResult})
 }
 
