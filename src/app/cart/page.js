@@ -102,10 +102,17 @@ console.log(data);
   if (!data) return <p>No data</p>;
   if (!weather) return <p>No weather</p>;
 
+  const total = data.reduce((sum, item) => sum + Number(item.price), 0);
+
   return (
     <ThemeProvider theme={theme}>
       Today's temperature: {JSON.stringify(weather.temp)}
       <Container component="main" maxWidth="xs">
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="h6">
+            Total: €{total.toFixed(2)}
+          </Typography>
+        </Box>
         <div style={{ fontSize: '40px' }}>cart</div>
         <div>
           {data.map((item, i) => (
@@ -125,6 +132,7 @@ console.log(data);
                 Remove
               </Button>
             </Box>
+            
           ))}
           <Button
             variant="contained"
