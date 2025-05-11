@@ -105,7 +105,15 @@ export default function Page() {
             - 
             {item.price}
             <br></br>
-            <Button onClick={() => putInCart(item)} variant="outlined"> Add to cart </Button>
+           <Button
+  variant="outlined"
+  onClick={() => {
+    putInCart(item);
+    alert(`${item.pname} added to cart!`);
+  }}
+>
+  Add to cart
+</Button>
           </div>
         ))
       }
