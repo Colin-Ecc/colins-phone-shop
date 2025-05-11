@@ -29,11 +29,16 @@ export default function Page() {
   // function for putting items into the shopping cart.
   //
   function putInCart(pname){
-
+    console.log(pname);
+    
     console.log("putting in cart: " + pname)
 
 
-    fetch("api/putInCart?pname="+pname);
+    // fetch("api/putInCart?pname="+pname);
+    fetch("api/putInCart", {
+      method: "POST" , 
+      body: JSON.stringify(pname),
+    })
 
 
  
@@ -100,7 +105,7 @@ export default function Page() {
             - 
             {item.price}
             <br></br>
-            <Button onClick={() => putInCart(item.pname)} variant="outlined"> Add to cart </Button>
+            <Button onClick={() => putInCart(item)} variant="outlined"> Add to cart </Button>
           </div>
         ))
       }
@@ -112,6 +117,3 @@ export default function Page() {
 
   );
 }
-
-
-
