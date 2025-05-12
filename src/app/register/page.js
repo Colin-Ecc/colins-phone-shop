@@ -133,15 +133,15 @@ export default function Page() {
             autoComplete="current-password"
           />
 
-          <TextField
+           <TextField
             margin="normal"
             required
             fullWidth
-            name="dob"
-            label="dob"
-            type="text"
             id="dob"
-            autoComplete=""
+            name="dob"
+            label=""
+            type="date"                      // ← use date picker
+           
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
