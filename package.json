@@ -1,12 +1,14 @@
 {
   "name": "colins-phone-shop",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:unit": "qunit tests/**/*.test.js" 
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -15,10 +17,14 @@
     "mailersend": "^2.2.0",
     "mongodb": "^6.15.0",
     "next": "^13.5.7-canary.16",
+    "next-auth": "^4.24.11",
     "picocolors": "^1.0.0",
     "react": "latest",
     "react-dom": "latest",
     "request": "^2.88.2",
     "requests": "^0.3.0"
+  },
+  "devDependencies": {
+    "qunit": "^2.24.1"
   }
 }
